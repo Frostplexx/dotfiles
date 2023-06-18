@@ -4,13 +4,7 @@
 # ADD THE ITEMS YOU WANT TO BACKUP HERE
 # Example: ZSHRC="$HOME/.zshrc"
 
-ITEMS= [
-  "$HOME/.zshrc", 
-  "$HOME/.p10k.zsh", 
-  "$HOME/.config/alacritty/alacritty.yml", 
-  "$HOME/.ideavimrc", 
-  "$HOME/.vimrc"
-  ]
+ITEMS= ["$HOME/.zshrc","$HOME/.p10k.zsh","$HOME/.config/alacritty/alacritty.yml","$HOME/.ideavimrc", "$HOME/.vimrc"]
 
 # =====================================================
 
