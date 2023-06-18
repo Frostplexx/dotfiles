@@ -8,8 +8,7 @@ fi
 # Alias python and pip
 alias python=python3
 alias pip=pip3
-alias vim=nvim
-alias vi=nvim
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -82,7 +81,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-iterm-touchbar)
+plugins=(git zsh-syntax-highlighting 1password zsh-autosuggestions history auto-notify)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -119,3 +118,5 @@ export PATH=$PATH:/Users/daniel/.spicetify
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /opt/homebrew/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /opt/homebrew/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
+
+[ -f "/Users/daniel/.ghcup/env" ] && source "/Users/daniel/.ghcup/env" # ghcup-envexport PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
