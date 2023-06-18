@@ -8,7 +8,8 @@
 #
 # All imports must either be absolute paths starting with `/`, or paths relative
 # to the user's home directory starting with `~/`.
-#import:
+import:
+   - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
 #  - /path/to/alacritty.yml
 
 # Any items in the `env` entry below will be added as
@@ -47,7 +48,7 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 0
+    x: 1
     y: 5
 
   # Spread additional padding evenly around the terminal content.
@@ -200,9 +201,9 @@ draw_bold_text_with_bright_colors: true
 # Colors (Tomorrow Night)
 colors:
   # Default colors
-  primary:
-    background: '#21242a'
-    foreground: '#acb1bd'
+  # primary:
+    # background: '#21242a'
+    # foreground: '#acb1bd'
 
     # Bright and dim foreground colors
     #
@@ -294,26 +295,26 @@ colors:
   #  background: CellForeground
 
   # Normal colors
-  normal:
-    black:   '#21242a'
-    red:     '#d17277'
-    green:   '#a0c180'
-    yellow:  '#dfc184'
-    blue:    '#73ade9'
-    magenta: '#bb7bd7'
-    cyan:    '#6fb3bf'
-    white:   '#acb1bd'
+  # normal:
+    # black:   '#21242a'
+    # red:     '#d17277'
+    # green:   '#a0c180'
+    # yellow:  '#dfc184'
+    # blue:    '#73ade9'
+    # magenta: '#bb7bd7'
+    # cyan:    '#6fb3bf'
+    # white:   '#acb1bd'
 
   # Bright colors
-  bright:
-    black:   '#757575'
-    red:     '#d17277'
-    green:   '#a0c180'
-    yellow:  '#dfc184'
-    blue:    '#73ade9'
-    magenta: '#bb7bd7'
-    cyan:    '#6fb3bf'
-    white:   '#acb1bd'
+  # bright:
+    # black:   '#757575'
+    # red:     '#d17277'
+    # green:   '#a0c180'
+    # yellow:  '#dfc184'
+    # blue:    '#73ade9'
+    # magenta: '#bb7bd7'
+    # cyan:    '#6fb3bf'
+    # white:   '#acb1bd'
 
   # Dim colors
   #
