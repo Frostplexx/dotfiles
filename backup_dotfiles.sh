@@ -34,7 +34,7 @@ echo "Done"
 echo "Committing and uploading to github"
 git add .
 git commit -m "Backup dotfiles"
-git push origin master
+git push
 echo "Done"
 
 # press any key to exit
