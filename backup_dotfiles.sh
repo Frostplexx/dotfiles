@@ -31,8 +31,8 @@ done
 echo "Done"
 
 # commit and upload them to github
-echo "Committing and uploading to github"
 echo "---------------------------------"
+echo "Committing and uploading to github:"
 git add .
 git commit -m "Backup dotfiles"
 git push
