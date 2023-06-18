@@ -32,11 +32,13 @@ echo "Done"
 
 # commit and upload them to github
 echo "Committing and uploading to github"
+echo "---------------------------------"
 git add .
 git commit -m "Backup dotfiles"
 git push
 echo "Done"
 
 # press any key to exit
+echo "
 read -n 1 -s -r -p "Press any key to exit"
 
