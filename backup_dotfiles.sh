@@ -19,7 +19,9 @@ echo "Welcome to the dotfiles backup script v$VERSION"
 
 # Loop through the items to backup and copy them into this directory 
 # if the items doesnt exist then print an error message
+echo "Starting backup..."
 for item in $ITEMS; do
+  echo $item
   if [ -f $item ]; then
     echo "Copying $item to this directory"
     cp $item .
