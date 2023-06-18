@@ -41,6 +41,6 @@ git push
 echo "Done"
 
 # press any key to exit
-echo "
+echo ""
 read -n 1 -s -r -p "Press any key to exit"
 
