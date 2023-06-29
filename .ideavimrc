@@ -27,6 +27,8 @@ set whichwrap=b,s,<,>,h,l,[,]
 " register leader
 let mapleader = " "
 
+" register modifier
+
 " Center screen when jumping to next match
 nnoremap n nzz
 nnoremap N Nzz
@@ -53,3 +55,11 @@ nnoremap <leader><cr> :nohlsearch<cr>
 " comment out
 :map <leader>cc <Action>(CommentByLineComment)
 :map <leader>tt <Action>(CommentByBlockComment)set clipboard+=ideaputset clipboard+=ideaput
+
+" navigation
+:map <leader>gg <Action>(GotoClass)
+:map <leader>gb <Action>(GotoDeclaration)
+:map <leader>gf <Action>(GotoFile)
+
+:map <leader>l <Action>(NextTab)
+:map <leader>h <Action>(PreviousTab)
