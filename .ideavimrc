@@ -63,3 +63,6 @@ nnoremap <leader><cr> :nohlsearch<cr>
 
 :map <leader>l <Action>(NextTab)
 :map <leader>h <Action>(PreviousTab)
+
+" ssh
+:map <leader>ss <Action>(com.jetbrains.plugins.remotesdk.console.RunSshConsoleAction)
