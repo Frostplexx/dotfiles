@@ -41,6 +41,7 @@ then
     echo "  -v, --version   Show the version of this script"
     echo "  -b, --backup    Backup the dotfiles"
     echo "  -r, --restore   Restore the dotfiles"
+    echo "  -g, --generate  Generate a public and private key"
     exit
 fi
 
@@ -151,7 +152,16 @@ then
                 echo "Error: $item does not exist"
             fi
         done
+        # delete the key.bin file
+        rm key.bin
     else 
         echo "Warn: private.pem file does not exist. Skipping decryption"
     fi
+fi
+
+if [ "$1" == "-g" ] || [ "$1" == "--generate" ]
+then
+    # generate a public and private key
+    openssl genrsa -out private.pem 2048
+    openssl rsa -in private.pem -outform PEM -pubout -out public.pem
 fi
