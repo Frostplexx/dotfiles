@@ -68,7 +68,7 @@ then
       fi
     done
 
-    if [-f public.pem]; then
+    if [ -f public.pem ]; then
       # check if a public.pem file exists that contains a public key
       # generate an encryption key 
       openssl rand -base64 32 > key.bin
