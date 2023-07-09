@@ -6,14 +6,17 @@ This is a repo for backing up all my dotfiles.
 
 ### Backing Up
 
-Run `backup_dotfiles.sh`
+Run `backup_dotfiles.sh -` to back up your files. For more info run `backup_dotfiles.sh -h`
 
 ### Adding Items for backup
 
 1. Open `backup_dotfiles.sh`
-2. Add the path to the file to the `ITEMS` Array.
-3. Run `backup_dotfiles.sh`
+2. Add the path to the file to the `ITEMS` array.
+3. If you want to encrypt the file add it to the `ENCRYPTED_ITEMS` array.
+4. If you dont yet have a keyset run `backup_dotfiles.sh -g` to generate one
+5. Run `backup_dotfiles.sh -b`
 
 ### Restoring Items
 
-This process is manual and you need to look up where each item is stored (the `$ITEMS` Array may be useful for that)
+1. Run `backup_dotfiles.sh -r` to restore the items
+2. If no `private.pem` file is found the decryption of encrypted files will be skipped!
