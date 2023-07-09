@@ -71,7 +71,7 @@ then
       # generate an encryption key 
       openssl rand -base64 32 > key.bin
       # Encrypt the key.bin file
-      openssl enc -aes-256-cbc -salt -in key.bin -out key.bin.enc -pass file:./key.bin -pbkdf2
+      openssl enc -aes-256-cbc -salt -in key.bin -out key.bin.enc -pass file:./public.pem -pbkdf2
 
       echo "Ecnrypting files..."
       for item in ${ENCRYPTED_ITEMS[@]}; do 
@@ -117,4 +117,40 @@ then
     git commit -m "Backup dotfiles"
     git push
     echo "Done"
+fi
+
+
+if [ "$1" == "-r" ] || [ "$1" == "--restore" ]
+then 
+    # get the last path part of the files in the Items array
+    # Example: $HOME/.zshrc -> .zshrc
+    # this is needed because the files in the Items array are in this directory
+    for item in ${ITEMS[@]}; do
+        cur_item=$(echo $item | rev | cut -d'/' -f1 | rev)
+        if [ -f $cur_item ]; then
+            echo "Restoring $cur_item"
+            cp $cur_item $item 
+        else
+            echo "Error: $item does not exist"
+        fi
+    done
+
+    # handle the encrypted files
+    if [ -f private.pem ]; then
+        # decrypt the key.bin.enc file
+        openssl enc -aes-256-cbc -d -in key.bin.enc -out key.bin -pass file:./private.pem -pbkdf2
+        # decrypt the files
+        for item in ${ENCRYPTED_ITEMS[@]}; do 
+            # current item is the last part of the path of the item in the ENCRYPTED_ITEMS array and .enc is added to it
+            cur_item=$(echo $item | rev | cut -d'/' -f1 | rev)".enc"
+            if [ -f $cur_item ]; then
+                echo "Decrypting $cur_item"
+                openssl enc -aes-256-cbc -d -in $cur_item -out $item -pass file:./key.bin -pbkdf2
+            else
+                echo "Error: $item does not exist"
+            fi
+        done
+    else 
+        echo "Warn: private.pem file does not exist. Skipping decryption"
+    fi
 fi
