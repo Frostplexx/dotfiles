@@ -3,15 +3,13 @@
 # =====================================================
 # ADD THE ITEMS YOU WANT TO BACKUP HERE
 # Example: ZSHRC="$HOME/.zshrc"
-
 ITEMS=("$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.config/alacritty/alacritty.yml" "$HOME/.ideavimrc" "$HOME/.vimrc")
+# ADD THE ITEMS YOU WANT TO ENCRYPT AND BACKUP HERE
 ENCRYPTED_ITEMS=("$HOME/.ssh/config")
 
 # =====================================================
 
 VERSION=2.0
-
-echo "Welcome to the dotfiles backup script v$VERSION"
 
 # check if openssl is installed
 if ! command -v openssl &> /dev/null
@@ -57,10 +55,6 @@ fi
 if [ "$1" == "-b" ] || [ "$1" == "--backup" ]
 then
     echo "Starting backup..."
-    # generate an encryption key 
-    openssl rand -base64 32 > key.bin
-    # Encrypt the key.bin file
-    openssl enc -aes-256-cbc -salt -in key.bin -out key.bin.enc -iter file:./key.bin
 
     # Loop through the items to backup and copy them into this directory 
     # if the items doesnt exist then print an error message
@@ -74,22 +68,32 @@ then
       fi
     done
 
-    echo "Ecnrypting files..."
-    for item in ${ENCRYPTED_ITEMS[@]}; do 
-      if [ -f $item ]; then
-        echo "Encrypting $item"
-        openssl enc -aes-256-cbc -salt -in $item -out $item.enc -pass file:./key.bin -pbkdf2
-        mv $item.enc .
-      else
-        echo "Error: $item does not exist"
-      fi
-    done 
+    if [-f public.pem]; then
+      # check if a public.pem file exists that contains a public key
+      # generate an encryption key 
+      openssl rand -base64 32 > key.bin
+      # Encrypt the key.bin file
+      openssl enc -aes-256-cbc -salt -in key.bin -out key.bin.enc -iter file:./key.bin
 
-
-    echo "Done"
+      echo "Ecnrypting files..."
+      for item in ${ENCRYPTED_ITEMS[@]}; do 
+        if [ -f $item ]; then
+          echo "Encrypting $item"
+          openssl enc -aes-256-cbc -salt -in $item -out $item.enc -pass file:./key.bin -pbkdf2
+          mv $item.enc .
+        else
+          echo "Error: $item does not exist"
+        fi
+      done 
+    else
+      echo "Warn: public.pem file does not exist. Skipping encryption"
+    fi
 
     # remove the key.bin file
     rm key.bin
+
+    echo "Done"
+
 
     # check if a private.pem file exists that contains a private key and if yes warn the user if its not in the .gitingore file
     # also give the user the option to atumaticly add it to the .gitignore file, continue without adding it or abort the script
