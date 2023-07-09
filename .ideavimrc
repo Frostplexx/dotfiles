@@ -64,11 +64,15 @@ nnoremap <leader><cr> :nohlsearch<cr>
 :map <leader>gg <Action>(GotoClass)
 :map <leader>gb <Action>(GotoDeclaration)
 :map <leader>gf <Action>(GotoFile)
+:map <leader>x <Action>(CloseContent)
 
-:map <leader>l <Action>(NextTab)
-:map <leader>h <Action>(PreviousTab)
+":map <leader>l <Action>(NextTab)
+":map <leader>h <Action>(PreviousTab)
 
-:map <leader>tt :NERDTreeToggle<Enter>
+:map <Tab> <Action>(NextTab)
+:map <S-Tab> <Action>(PreviousTab)
+
+:map <leader>ee :NERDTreeToggle<Enter>
 
 
 " ssh
