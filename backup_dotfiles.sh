@@ -103,7 +103,7 @@ then
             echo "Do you want to add it to the .gitignore file (y), coninue (n) or abort (a)? (y/n/a)"
             read -r answer
             if [ "$answer" == "y" ]; then
-                echo -e "\nprivate.pem" >> .gitignore
+                echo -e "\n./private.pem" >> .gitignore
                 echo "Added private.pem to .gitignore"
             elif [ "$answer" == "a" ]; then
                 exit
