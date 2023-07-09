@@ -71,7 +71,7 @@ then
       # generate an encryption key 
       openssl rand -base64 32 > key.bin
       # Encrypt the key.bin file
-      openssl enc -aes-256-cbc -salt -in key.bin -out key.bin.enc -iter file:./key.bin
+      openssl enc -aes-256-cbc -salt -in key.bin -out key.bin.enc -pass file:./key.bin -pbkdf2
 
       echo "Ecnrypting files..."
       for item in ${ENCRYPTED_ITEMS[@]}; do 
