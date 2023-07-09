@@ -14,6 +14,9 @@ alias pip=pip3
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+# Additional Path stuff
+eval "$(github-copilot-cli alias -- "$0")"
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 

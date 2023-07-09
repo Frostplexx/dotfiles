@@ -5,36 +5,112 @@
 # Example: ZSHRC="$HOME/.zshrc"
 
 ITEMS=("$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.config/alacritty/alacritty.yml" "$HOME/.ideavimrc" "$HOME/.vimrc")
+ENCRYPTED_ITEMS=("$HOME/.ssh/config")
 
 # =====================================================
 
-VERSION=1.0
+VERSION=2.0
 
 echo "Welcome to the dotfiles backup script v$VERSION"
 
-# Loop through the items to backup and copy them into this directory 
-# if the items doesnt exist then print an error message
-echo "Starting backup..."
-for item in ${ITEMS[@]}; do
-  if [ -f $item ]; then
-    echo "Copying $item to this directory"
-    cp $item .
-  else
-    echo "Error: $item does not exist"
-  fi
-done
+# check if openssl is installed
+if ! command -v openssl &> /dev/null
+then
+    echo "Error: openssl could not be found. Please install it"
+    exit
+fi
 
-echo "Done"
+# check if git is installed
+if ! command -v git &> /dev/null
+then
+    echo "Error: git could not be found. Please install it"
+    exit
+fi
 
-# commit and upload them to github
-echo "---------------------------------"
-echo "Committing and uploading to github:"
-git add .
-git commit -m "Backup dotfiles"
-git push
-echo "Done"
+# get the first argument
+if [ -z "$1" ]
+then
+    echo "Error: No argument supplied use -h or --help for help"
+    exit
+fi
 
-# press any key to exit
-echo ""
-read -n 1 -s -r -p "Press any key to exit"
+# check if the first argument is -h or --help
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]
+then
+    echo "Usage: ./backup_dotfiles.sh [OPTION]"
+    echo "Options:"
+    echo "  -h, --help      Show this help message"
+    echo "  -v, --version   Show the version of this script"
+    echo "  -b, --backup    Backup the dotfiles"
+    echo "  -r, --restore   Restore the dotfiles"
+    exit
+fi
 
+# check if the first argument is -v or --version
+if [ "$1" == "-v" ] || [ "$1" == "--version" ]
+then
+    echo "Version: $VERSION"
+    exit
+fi
+
+# check if the first argument is -b or --backup
+if [ "$1" == "-b" ] || [ "$1" == "--backup" ]
+then
+    echo "Starting backup..."
+    # generate an encryption key 
+    openssl rand -base64 32 > key.bin
+    # Encrypt the key.bin file
+    openssl enc -aes-256-cbc -salt -in key.bin -out key.bin.enc -iter file:./key.bin
+
+    # Loop through the items to backup and copy them into this directory 
+    # if the items doesnt exist then print an error message
+    echo "Starting backup..."
+    for item in ${ITEMS[@]}; do
+      if [ -f $item ]; then
+        echo "Copying $item to this directory"
+        cp $item .
+      else
+        echo "Error: $item does not exist"
+      fi
+    done
+
+    echo "Ecnrypting files..."
+    for item in ${ENCRYPTED_ITEMS[@]}; do 
+      if [ -f $item ]; then
+        echo "Encrypting $item"
+        openssl enc -aes-256-cbc -salt -in $item -out $item.enc -pass file:./key.bin -pbkdf2
+        mv $item.enc .
+      else
+        echo "Error: $item does not exist"
+      fi
+    done 
+
+
+    echo "Done"
+
+    # remove the key.bin file
+    rm key.bin
+
+    # check if a private.pem file exists that contains a private key and if yes warn the user if its not in the .gitingore file
+    # also give the user the option to atumaticly add it to the .gitignore file, continue without adding it or abort the script
+    if [ -f private.pem ]; then
+        if ! grep -q "private.pem" .gitignore; then
+            echo "Warning: private.pem file exists but is not in the .gitignore file. This file contains a private key and should not be uploaded to github"
+            echo "Do you want to add it to the .gitignore file (y), coninue (n) or abort (a)? (y/n/a)"
+            read -r answer
+            if [ "$answer" == "y" ]; then
+                echo "private.pem" >> .gitignore
+            elif [ "$answer" == "a" ]; then
+                exit
+            fi
+        fi
+    fi
+
+    # commit and upload them to github
+    echo "---------------------------------"
+    echo "Committing and uploading to github:"
+    git add .
+    git commit -m "Backup dotfiles"
+    git push
+    echo "Done"
+fi
