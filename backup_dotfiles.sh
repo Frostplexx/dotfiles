@@ -54,8 +54,6 @@ fi
 # check if the first argument is -b or --backup
 if [ "$1" == "-b" ] || [ "$1" == "--backup" ]
 then
-    echo "Starting backup..."
-
     # Loop through the items to backup and copy them into this directory 
     # if the items doesnt exist then print an error message
     echo "Starting backup..."
@@ -85,12 +83,13 @@ then
           echo "Error: $item does not exist"
         fi
       done 
+      
+      # remove the key.bin file
+      rm key.bin
     else
       echo "Warn: public.pem file does not exist. Skipping encryption"
     fi
 
-    # remove the key.bin file
-    rm key.bin
 
     echo "Done"
 
