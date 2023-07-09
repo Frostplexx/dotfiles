@@ -71,7 +71,7 @@ then
       # generate an encryption key 
       openssl rand -base64 32 > key.bin
       # Encrypt the key.bin file
-      openssl enc -aes-256-cbc -salt -in key.bin -out key.bin.enc -pass file:./public.pem -pbkdf2
+      openssl rsautl -encrypt -inkey public.pem -pubin -in key.bin -out key.bin.enc
 
       echo "Ecnrypting files..."
       for item in ${ENCRYPTED_ITEMS[@]}; do 
@@ -138,7 +138,8 @@ then
     # handle the encrypted files
     if [ -f private.pem ]; then
         # decrypt the key.bin.enc file
-        openssl enc -aes-256-cbc -d -in key.bin.enc -out key.bin -pass file:./private.pem -pbkdf2
+        openssl rsautl -decrypt -inkey private.pem -in key.bin.enc -out key.bin
+
         # decrypt the files
         for item in ${ENCRYPTED_ITEMS[@]}; do 
             # current item is the last part of the path of the item in the ENCRYPTED_ITEMS array and .enc is added to it
