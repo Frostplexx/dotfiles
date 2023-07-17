@@ -21,7 +21,7 @@ export ZSH="$HOME/.oh-my-zsh"
 eval "$(github-copilot-cli alias -- "$0")"
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
-
+source "$HOME/.cargo/env"
 
 #Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -84,14 +84,20 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting 1password zsh-autosuggestions history auto-notify)
+plugins=(git 1password  history auto-notify)
 
 source $ZSH/oh-my-zsh.sh
+
+# Import homebrew plugins
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 
 # User configuration
 
@@ -128,3 +134,5 @@ export PATH=$PATH:/Users/daniel/.spicetify
 [[ -f /opt/homebrew/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /opt/homebrew/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
 
 [ -f "/Users/daniel/.ghcup/env" ] && source "/Users/daniel/.ghcup/env" # ghcup-envexport PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+[ -f "/Users/daniel/.ghcup/env" ] && source "/Users/daniel/.ghcup/env" # ghcup-env
