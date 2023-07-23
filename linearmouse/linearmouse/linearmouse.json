@@ -1,0 +1,43 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.9.3-beta.3",
+  "schemes" : [
+    {
+      "buttons" : {
+        "mappings" : [
+          {
+            "action" : "missionControl.spaceLeft",
+            "option" : false,
+            "shift" : false,
+            "button" : 3,
+            "command" : false,
+            "control" : false
+          },
+          {
+            "action" : "missionControl.spaceRight",
+            "option" : false,
+            "shift" : false,
+            "button" : 4,
+            "command" : false,
+            "control" : false
+          }
+        ]
+      },
+      "if" : {
+        "device" : {
+          "productName" : "Wired Gaming Mouse",
+          "productID" : "0x36",
+          "category" : "mouse",
+          "vendorID" : "0x258a"
+        }
+      },
+      "pointer" : {
+        "disableAcceleration" : true
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        }
+      }
+    }
+  ]
+}

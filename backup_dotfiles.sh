@@ -8,7 +8,7 @@ ITEMS=("$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.config/alacritty/alacritty.yml" 
 ENCRYPTED_ITEMS=("$HOME/.ssh/config")
 # ADD YOUR FOLDERS HERE
 # Example: ("$HOME/.config/spicetify", ...)
-FOLDERS=("$HOME/.config/spicetify")
+FOLDERS=("$HOME/.config/spicetify", "$HOME/.config/raycast", "$HOME/.config/linearmouse")
 # =====================================================
 
 VERSION=2.1
@@ -151,6 +151,17 @@ then
             cp $cur_item $item 
         else
             echo "Error: $item does not exist"
+        fi
+    done
+
+    # Restore the folders
+    for folder in ${FOLDERS[@]}; do
+        cur_folder=$(echo $item | rev | cut -d'/' -f1 | rev)
+        if [ -d $cur_folder ]; then
+            echo "Restoring $cur_folder"
+            cp -r $cur_folder $folder
+        else
+            echo "Error: $folder does not exist"
         fi
     done
 
