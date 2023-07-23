@@ -2,14 +2,16 @@
 
 # =====================================================
 # ADD THE ITEMS YOU WANT TO BACKUP HERE
-# Example: ZSHRC="$HOME/.zshrc"
+# Example: ("$HOME/.zshrc",...)
 ITEMS=("$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.config/alacritty/alacritty.yml" "$HOME/.ideavimrc" "$HOME/.vimrc")
 # ADD THE ITEMS YOU WANT TO ENCRYPT AND BACKUP HERE
 ENCRYPTED_ITEMS=("$HOME/.ssh/config")
-
+# ADD YOUR FOLDERS HERE
+# Example: ("$HOME/.config/spicetify/", ...)
+FOLDERS=("$HOME/.config/spicetify/")
 # =====================================================
 
-VERSION=2.0
+VERSION=2.1
 
 # check if openssl is installed
 if ! command -v openssl &> /dev/null
@@ -64,6 +66,16 @@ then
         cp $item .
       else
         echo "Error: $item does not exist"
+      fi
+    done
+
+    # Backup the folders 
+    for folder in ${FOLDERS[@]}; do
+      if [ -f $folder ]; then
+        echo "Copying $folder to this directory"
+        cp -r $folder .
+      else
+        echo "Error: $folder does not exist"
       fi
     done
 
