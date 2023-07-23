@@ -7,8 +7,8 @@ ITEMS=("$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.config/alacritty/alacritty.yml" 
 # ADD THE ITEMS YOU WANT TO ENCRYPT AND BACKUP HERE
 ENCRYPTED_ITEMS=("$HOME/.ssh/config")
 # ADD YOUR FOLDERS HERE
-# Example: ("$HOME/.config/spicetify/", ...)
-FOLDERS=("$HOME/.config/spicetify/")
+# Example: ("$HOME/.config/spicetify", ...)
+FOLDERS=("$HOME/.config/spicetify")
 # =====================================================
 
 VERSION=2.1
@@ -71,8 +71,18 @@ then
 
     # Backup the folders 
     for folder in ${FOLDERS[@]}; do
-      echo "Copying $folder to this directory"
-      cp -r $folder ./
+      #check if folder exists
+        if [ ! -d $folder ]; then
+            echo "Error: $folder does not exist"
+           continue
+           else
+            # get the name of the folder which is the last part of the path
+            folder_name=$(echo $folder | rev | cut -d'/' -f1 | rev)
+            # copy the folder into a subfolder into this directory that has the same name as the folder
+            echo "Copying $folder to this directory"
+            mkdir $folder_name
+            cp -r $folder $folder_name
+        fi
     done
 
     if [ -f public.pem ]; then
