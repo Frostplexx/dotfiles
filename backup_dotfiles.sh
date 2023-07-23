@@ -72,6 +72,7 @@ then
     # Backup the folders 
     for folder in ${FOLDERS[@]}; do
       echo "Copying $folder to this directory"
+      cp -r $folder .
     done
 
     if [ -f public.pem ]; then
