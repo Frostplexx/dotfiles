@@ -71,12 +71,7 @@ then
 
     # Backup the folders 
     for folder in ${FOLDERS[@]}; do
-      if [ -f $folder ]; then
-        echo "Copying $folder to this directory"
-        cp -r $folder .
-      else
-        echo "Error: $folder does not exist"
-      fi
+      echo "Copying $folder to this directory"
     done
 
     if [ -f public.pem ]; then
