@@ -3,12 +3,12 @@
 # =====================================================
 # ADD THE ITEMS YOU WANT TO BACKUP HERE
 # Example: ("$HOME/.zshrc",...)
-ITEMS=("$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.config/kitty/kitty.conf" "$HOME/.ideavimrc" "$HOME/.vimrc")
+ITEMS=("$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.ideavimrc" "$HOME/.vimrc")
 # ADD THE ITEMS YOU WANT TO ENCRYPT AND BACKUP HERE
 ENCRYPTED_ITEMS=("$HOME/.ssh/config")
 # ADD YOUR FOLDERS HERE
 # Example: ("$HOME/.config/spicetify", ...)
-FOLDERS=("$HOME/.config/spicetify", "$HOME/.config/raycast", "$HOME/.config/linearmouse")
+FOLDERS=("$HOME/.config/spicetify", "$HOME/.config/raycast", "$HOME/.config/linearmouse" "$HOME/.config/kitty")
 # =====================================================
 
 VERSION=2.1
