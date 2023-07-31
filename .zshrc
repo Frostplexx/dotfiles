@@ -11,6 +11,10 @@ alias pip=pip3
 alias vim=neovide
 alias vi=neovide 
 
+# Kitty specific
+alias s="kitty +kitten ssh"
+alias transfer="kitty +kitten transfer"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 

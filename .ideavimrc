@@ -4,7 +4,7 @@ set scrolloff=999
 set ignorecase smartcase
 set history=1000
 set incsearch
-set relativenumber
+set relativenumber number
 set visualbell
 set idearefactormode=keep
 set showcmd
@@ -77,3 +77,4 @@ nnoremap <leader><cr> :nohlsearch<cr>
 
 " ssh
 :map <leader>ss <Action>(com.jebrains.plugins.remotesdk.console.RunSshConsoleAction)
+set clipboard^=ideaput
