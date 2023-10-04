@@ -5,16 +5,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+alias http-server="ifconfig en0 |grep inet |awk '{print $2}'; python -m http.server"
 # Alias python and pip
 alias python=python3
 alias pip=pip3
+
 alias vim=neovide
-alias vi=neovide 
 
 # Kitty specific
 alias s="kitty +kitten ssh"
 alias transfer="kitty +kitten transfer"
-
+alias icat="kitty +kitten icat"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
