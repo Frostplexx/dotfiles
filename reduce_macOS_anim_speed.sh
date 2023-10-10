@@ -50,10 +50,25 @@ then
   defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
   echo "Enabling show hidden files."
-  defaults write com.apple.Finder AppleShowAllFiles true && killall Finder
-
+  defaults write com.apple.Finder AppleShowAllFiles true 
   echo "Show Folders first in Finder"
-  defaults write com.apple.finder _FXSortFoldersFirst -bool true && killall Finder
+  defaults write com.apple.finder _FXSortFoldersFirst -bool true
+  echo "Show Hidden Files"
+  defaults write NSGlobalDomain "AppleShowAllExtensions" -bool "true"
+  echo "Settings Dock Size"
+  defaults write com.apple.dock "tilesize" -int "45"
+  echo "Showing Path Bar"
+  defaults write com.apple.finder "ShowPathbar" -bool "true"
+  echo "Setting Clock"
+  defaults write com.apple.menuextra.clock "DateFormat" -string "\"HH:mm\""
+  echo "Adjusting Trackpad"
+  defaults write com.apple.AppleMultitouchTrackpad "FirstClickThreshold" -int "0"
+  echo "xCode Settings"
+  defaults write com.apple.dt.Xcode "ShowBuildOperationDuration" -bool "true" && killall Xcode
+
+  killall Finder
+  killall Dock
+
 fi
 
 
@@ -69,6 +84,11 @@ then
   defaults delete NSGlobalDomain ApplePressAndHoldEnabled
   defaults delete com.apple.finder AppleShowAllFiles
   defaults delete com.apple.finder _FXSortFoldersFirst
+  defaults delete com.apple.dock "tilesize" 
+  defaults delete NSGlobalDomain "AppleShowAllExtensions"
+  defaults delete com.apple.finder "ShowPathbar"
+  defaults delete com.apple.AppleMultitouchTrackpad "FirstClickThreshold"
+  defaults delete com.apple.dt.Xcode "ShowBuildOperationDuration" && killall Xcode
   killall Dock
   killall Finder
 fi 
