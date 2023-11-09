@@ -1,0 +1,95 @@
+{
+  "schemes" : [
+    {
+      "pointer" : {
+        "disableAcceleration" : true
+      },
+      "if" : {
+        "device" : {
+          "vendorID" : "0x258a",
+          "productID" : "0x36",
+          "category" : "mouse",
+          "productName" : "Wired Gaming Mouse"
+        }
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        },
+        "acceleration" : {
+          "vertical" : 1
+        }
+      },
+      "buttons" : {
+        "mappings" : [
+          {
+            "option" : false,
+            "control" : false,
+            "action" : "missionControl.spaceLeft",
+            "command" : false,
+            "shift" : false,
+            "button" : 3
+          },
+          {
+            "command" : false,
+            "option" : false,
+            "shift" : false,
+            "action" : "missionControl.spaceRight",
+            "control" : false,
+            "button" : 4
+          }
+        ]
+      }
+    },
+    {
+      "buttons" : {
+        "universalBackForward" : false,
+        "mappings" : [
+          {
+            "option" : false,
+            "action" : "missionControl.spaceLeft",
+            "control" : false,
+            "button" : 3,
+            "command" : false,
+            "shift" : false
+          },
+          {
+            "command" : false,
+            "shift" : false,
+            "control" : false,
+            "action" : "missionControl.spaceRight",
+            "button" : 4,
+            "option" : false
+          }
+        ]
+      },
+      "scrolling" : {
+        "speed" : {
+          "vertical" : 0
+        },
+        "reverse" : {
+          "vertical" : true
+        },
+        "distance" : {
+          "vertical" : 3
+        },
+        "acceleration" : {
+          "vertical" : 1
+        }
+      },
+      "if" : {
+        "device" : {
+          "serialNumber" : "205B37675943",
+          "category" : "mouse",
+          "productID" : "0xc092",
+          "vendorID" : "0x46d",
+          "productName" : "G203 LIGHTSYNC Gaming Mouse"
+        }
+      },
+      "pointer" : {
+        "disableAcceleration" : true
+      }
+    }
+  ],
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.9.4-beta.1"
+}
