@@ -53,7 +53,7 @@ echo "Installing Powerlevel10k"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 echo "Restoring dotfiles"
-./backup_dotfiles.sh -r
+/backup_dotfiles.sh -r
 
 echo "Tweaking macOS"
 ./reduce_macOS_anim_speed.sh -a

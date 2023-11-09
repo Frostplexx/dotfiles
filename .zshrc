@@ -6,6 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 alias http-server="ifconfig en0 |grep inet |awk '{print $2}'; python -m http.server"
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 # Alias python and pip
 alias python=python3
 alias pip=pip3

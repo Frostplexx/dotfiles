@@ -12,6 +12,16 @@ set showcmd
 " extensions
 set sneak
 
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
 " plugins
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
@@ -40,6 +50,9 @@ nnoremap N Nzz
 vnoremap n nzz
 vnoremap N Nzz
 
+nnoremap <leader>d F1
+
+nnoremap <leader>w <ctrl-w>
 
 " clear the search buffer when hitting return
 nnoremap <leader><cr> :nohlsearch<cr>
@@ -55,6 +68,9 @@ nnoremap <leader><cr> :nohlsearch<cr>
 :map <leader>ff <Action>(QuickJavaDoc)
 :map <leader>ee <Action>(ShowErrorDescription)
 :map <leader>hh <Action>(QuickImplementations)
+
+" terminal
+:map <leader>tt <Action>(ActivateTerminalToolWindow)
 
 " comment out
 :map <leader>cc <Action>(CommentByLineComment)
@@ -77,4 +93,3 @@ nnoremap <leader><cr> :nohlsearch<cr>
 
 " ssh
 :map <leader>ss <Action>(com.jebrains.plugins.remotesdk.console.RunSshConsoleAction)
-set clipboard^=ideaput
