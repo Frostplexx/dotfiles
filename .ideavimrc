@@ -1,3 +1,7 @@
+" Run this command to symlink the file to the correct location
+" ln -s ~/.config/nvim/.ideavimrc ~/.ideavimrc
+
+
 " basic stuff
 set hlsearch
 set scrolloff=999
@@ -36,7 +40,7 @@ let NERDTreeDirArrows = 1
 " use system clipboard
 set clipboard=unnamedplus
 
-" wrap to new lien when pressing l,h,...
+" wrap to new line when pressing l,h,...
 set whichwrap=b,s,<,>,h,l,[,]
 
 " register leader
@@ -52,10 +56,17 @@ vnoremap N Nzz
 
 nnoremap <leader>d F1
 
+nnoremap <leader><leader> <l-S><l-S>
+
+map <leader><leader> <Action>(SearchEverywhere)
+
 nnoremap <leader>w <ctrl-w>
 
 " clear the search buffer when hitting return
 nnoremap <leader><cr> :nohlsearch<cr>
+
+nnoremap J :m+<cr>
+nnoremap K :m-<cr>
 
 " code Refactoring
 :map <leader>r <Action>(RenameElement)
@@ -70,10 +81,10 @@ nnoremap <leader><cr> :nohlsearch<cr>
 :map <leader>hh <Action>(QuickImplementations)
 
 " terminal
-:map <leader>tt <Action>(ActivateTerminalToolWindow)
+:map <leader>bt <Action>(ActivateTerminalToolWindow)
 
 " comment out
-:map <leader>cc <Action>(CommentByLineComment)
+:map gc <Action>(CommentByLineComment)
 :map <leader>bb <Action>(CommentByBlockComment)set clipboard+=ideaputset clipboard+=ideaput
 
 " navigation
@@ -88,7 +99,7 @@ nnoremap <leader><cr> :nohlsearch<cr>
 :map <Tab> <Action>(NextTab)
 :map <S-Tab> <Action>(PreviousTab)
 
-:map <leader>ee :NERDTreeToggle<Enter>
+:map <leader>e :NERDTreeToggle<Enter>
 
 
 " ssh

@@ -16,6 +16,14 @@ let mapleader = " "
 
 map <leader>tt :NERDTreeToggle<Enter>
 
+map <leader>cc gc
+
+
+map tab :<S-l>
+map <S-tab> :bprevious<CR>
+
+let autochdir = 1
+
 " Stuff for modern terminal support
 
 " Mouse support
