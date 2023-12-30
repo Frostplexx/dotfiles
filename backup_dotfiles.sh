@@ -75,7 +75,7 @@ if [ "$1" == "-b" ] || [ "$1" == "--backup" ]; then
 			# copy the folder into a subfolder into this directory that has the same name as the folder
 			echo "Copying $folder to this directory"
 			mkdir $folder_name
-			cp -r $folder $folder_name
+			cp -r $folder .
 		fi
 	done
 
