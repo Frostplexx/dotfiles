@@ -6,7 +6,7 @@ This is a repo for backing up all my dotfiles.
 
 ### Backing Up
 
-Run `backup_dotfiles.sh -` to back up your files. For more info run `backup_dotfiles.sh -h`
+Run `backup_dotfiles.sh -b` to back up your files. For more info run `backup_dotfiles.sh -h`
 
 ### Adding Items for backup
 
