@@ -18,7 +18,6 @@ map <leader>tt :NERDTreeToggle<Enter>
 
 map <leader>cc gc
 
-
 map tab :<S-l>
 map <S-tab> :bprevious<CR>
 

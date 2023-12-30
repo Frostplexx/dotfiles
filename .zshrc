@@ -19,7 +19,9 @@ alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 # Alias python and pip
 alias python=python3
 alias pip=pip3
-alias vim=nvim
+# Vim aliases
+alias vim=nvim # Add vim alias
+alias nv=neovide # Add neovide alias
 # Kitty specific
 alias dv="cd ~/Documents/Development/"
 alias s="kitty +kitten ssh"
@@ -27,9 +29,11 @@ alias transfer="kitty +kitten transfer"
 alias icat="kitty +kitten icat"
 alias hg="kitten hyperlinked_grep"
 
-export OPENAI_API_KEY="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"
-
+# More aliases for other apps 
 alias spt="spotify_player"
+alias ls="eza --icons --git --header" 
+
+
 export PATH=$PATH:/Users/daniel/.spicetify
 
 # Configure Autonotify
@@ -59,7 +63,7 @@ setopt HIST_IGNORE_ALL_DUPS
 #
 
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
-bindkey -v
+bindkey -e
 
 # Prompt for spelling correction of commands.
 #setopt CORRECT

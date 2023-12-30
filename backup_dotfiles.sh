@@ -8,10 +8,10 @@ ITEMS=("$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.ideavimrc" "$HOME/.vimrc" "$HOME
 ENCRYPTED_ITEMS=("$HOME/.ssh/config")
 # ADD YOUR FOLDERS HERE
 # Example: ("$HOME/.config/spicetify", ...)
-FOLDERS=("$HOME/.config/spicetify", "$HOME/.config/raycast", "$HOME/.config/linearmouse" "$HOME/.config/kitty")
+FOLDERS=("$HOME/.config")
 # =====================================================
 
-VERSION=2.1
+VERSION=2.2
 
 # check if openssl is installed
 if ! command -v openssl &>/dev/null; then

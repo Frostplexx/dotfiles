@@ -1,0 +1,72 @@
+#!/usr/bin/env sh
+
+# Unload the macOS WindowManager process
+launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist > /dev/null 2>&1 &
+
+# Load Scripting Addition
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# Set tiling layout and padding
+yabai -m config layout                       bsp
+yabai -m config top_padding                  3
+yabai -m config bottom_padding               3
+yabai -m config left_padding                 3
+yabai -m config right_padding                3
+yabai -m config window_gap                   10
+
+# Exclude apps from tiling
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Shottr|shottr$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add label="App Store" app="^App Store$" manage=off
+yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
+yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
+yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
+yabai -m rule --add label="Software Update" title="Software Update" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+yabai -m rule --add app="^Keka$" layer=above manage=off
+yabai -m rule --add app="^Disk Utility$" layer=above manage=off
+yabai -m rule --add app="^System Information$" layer=above manage=off
+yabai -m rule --add title='Discord Updater$' manage=off
+
+# Window opacity and shadow settings
+yabai -m config window_shadow                float
+yabai -m config window_opacity               on
+yabai -m config active_window_opacity        1
+yabai -m config normal_window_opacity        0.9
+yabai -m config window_topmost               off
+
+# Window Bordering
+yabai -m config window_border_width         2
+yabai -m config window_border_radius        12
+yabai -m config window_border_blur          on
+yabai -m config window_border_hidpi         on
+yabai -m config window_border               on
+
+# Window Animations
+yabai -m config window_animation_duration   0.0
+yabai -m config window_animation_frame_rate 60
+yabai -m config window_opacity_duration     0.0
+yabai -m config active_window_border_color  0xFFc4a7e7
+yabai -m config normal_window_border_color  0x50ff946f
+
+# Configure spaces 
+
+# Space 1 - Browser
+yabai -m rule --add app="^Google Chrome|Firefox|Arc|Safari$" space=1
+# Space 2 - Terminal
+yabai -m rule --add app="^Alacritty|kitty$" space=2
+# Space 3 - Code
+yabai -m rule --add app="^Code|RStudio|Neovide|neovide|Xcode$" space=3
+apps="^IntelliJ IDEA|WebStorm|RubyMine|PyCharm|DataGrig|CLion$"
+yabai -m rule --add app="${apps}" space=3  manage=off
+# Space 4 - Chat
+yabai -m rule --add app="^Slack|Telegram|WhatsApp|Signal|Skype|Microsoft Teams|Discord$" space=4
+# Space 5 - Music
+yabai -m rule --add app="^Spotify|Music|Vox|VOX$" space=5
+
+echo "yabai configuration loaded.."
