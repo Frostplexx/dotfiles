@@ -3,17 +3,15 @@ ctrl + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 
 # Application Shortcuts
-ctrl + fn - f : open ~
-ctrl + fn - t : open -na /Applications/Kitty.app
-ctrl + fn - s : open "x-apple.systempreferences:"
-ctrl + fn - a : open -a "About This Mac"
-ctrl + fn - c : open -na /Applications/Arc.app
-ctrl + fn - v : open -na /Applications/Neovide.app
-ctrl + fn - m : open -na /Applications/Spotify.app
+cmd + shift - f : open ~
+cmd + shift - t : open -na /Applications/Kitty.app
+cmd + shift - s : open "x-apple.systempreferences:"
+cmd + shift - a : open -na /Applications/Arc.app
+cmd + shift - v : open -na /Applications/Neovide.app
+cmd + shift - m : open -na /Applications/Spotify.app
 
 
 ctrl + shift - space : yabai -m space --layout "$(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "stack" else "bsp" end')"
-
 
 # focus window in bsp mode
 cmd + shift - h: yabai -m window --focus west

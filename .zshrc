@@ -22,6 +22,7 @@ alias pip=pip3
 # Vim aliases
 alias vim=nvim # Add vim alias
 alias nv=neovide # Add neovide alias
+alias g=lazygit # Add lazygit alias
 # Kitty specific
 alias dv="cd ~/Documents/Development/"
 alias s="kitty +kitten ssh"
