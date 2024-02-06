@@ -18,6 +18,7 @@ yabai -m config window_gap                   10
 # Exclude apps from tiling
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
+yabai -m rule --add app="^Preview$" manage=off
 yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^Shottr|shottr$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
@@ -34,6 +35,7 @@ yabai -m rule --add app="^Keka$" layer=above manage=off
 yabai -m rule --add app="^Disk Utility$" layer=above manage=off
 yabai -m rule --add app="^System Information$" layer=above manage=off
 yabai -m rule --add title='Discord Updater$' manage=off
+yabai -m rule --add app="^(Calculator|System Preferences|System Settings|Archive Utility|Finder)$" manage=off
 
 # Window opacity and shadow settings
 yabai -m config window_shadow                float
@@ -43,11 +45,9 @@ yabai -m config normal_window_opacity        0.9
 yabai -m config window_topmost               off
 
 # Window Bordering
-yabai -m config window_border_width         2
-yabai -m config window_border_radius        12
-yabai -m config window_border_blur          on
-yabai -m config window_border_hidpi         on
-yabai -m config window_border               on
+yabai -m config window_shadow float
+yabai -m config window_border_width 1
+yabai -m config active_window_border_color  0xBF999999
 
 # Window Animations
 yabai -m config window_animation_duration   0.0
@@ -58,17 +58,30 @@ yabai -m config normal_window_border_color  0x50ff946f
 
 # Configure spaces 
 
+# Space labels
+yabai -m space 1 --label web
+yabai -m space 2 --label teriminal
+yabai -m space 3 --label dev
+yabai -m space 4 --label chat
+yabai -m space 5 --label music
+
 # Space 1 - Browser
-yabai -m rule --add app="^Google Chrome|Firefox|Arc|Safari$" space=1
+yabai -m rule --add app="^Google Chrome|Firefox|Arc|Safari$" space=web
 # Space 2 - Terminal
-yabai -m rule --add app="^Alacritty|kitty$" space=2
+yabai -m rule --add app="^Alacritty|kitty$" space=terminal
 # Space 3 - Code
-yabai -m rule --add app="^Code|RStudio|Neovide|neovide|Xcode$" space=3
-apps="^IntelliJ IDEA|WebStorm|RubyMine|PyCharm|DataGrig|CLion$"
-yabai -m rule --add app="${apps}" space=3  manage=off
+yabai -m rule --add app="^Code|RStudio|Neovide|neovide|Xcode$" space=dev
+
+yabai -m rule --add app="^IntelliJ IDEA|WebStorm|RubyMine|PyCharm|DataGrig|CLion$" space=dev
 # Space 4 - Chat
-yabai -m rule --add app="^Slack|Telegram|WhatsApp|Signal|Skype|Microsoft Teams|Discord$" space=4
+yabai -m rule --add app="^Slack|Telegram|WhatsApp|Signal|Skype|Microsoft Teams|Discord$" space=chat
 # Space 5 - Music
-yabai -m rule --add app="^Spotify|Music|Vox|VOX$" space=5
+yabai -m rule --add app="^Spotify|Music|Vox|VOX$" space=music
+
+
+# Drag/resizes Windows with mouse without having to grab the edges first by holding ctrl
+yabai -m config mouse_modifier ctrl
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
 
 echo "yabai configuration loaded.."

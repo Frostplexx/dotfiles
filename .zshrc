@@ -5,6 +5,16 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
+#if [[ -z "$TMUX" ]] ;then
+#    ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
+#    if [[ -z "$ID" ]] ;then # if not available create a new one
+#        tmux new-session
+#    else
+#        tmux attach-session -t "$ID" # if available attach to it
+#    fi
+#fi
+
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
@@ -16,13 +26,14 @@ fi
 
 alias http-server="ifconfig en0 |grep inet |awk '{print $2}'; python -m http.server"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-# Alias python and pip
+
 alias python=python3
 alias pip=pip3
-# Vim aliases
 alias vim=nvim # Add vim alias
 alias nv=neovide # Add neovide alias
 alias g=lazygit # Add lazygit alias
+alias c=clear
+
 # Kitty specific
 alias dv="cd ~/Documents/Development/"
 alias s="kitty +kitten ssh"
@@ -33,10 +44,10 @@ alias hg="kitten hyperlinked_grep"
 # More aliases for other apps 
 alias spt="spotify_player"
 alias ls="eza --icons --git --header" 
+alias cat="bat"
+alias tree="eza --icons --git --header --tree"
 
-
-export PATH=$PATH:/Users/daniel/.spicetify
-
+export PATH=$PATH:/Users/daniel/.cargo/bin
 # Configure Autonotify
 export AUTO_NOTIFY_IGNORE=("docker" "man" "sleep" "spt" "spotify_player" "vim" "nvim" "ssh" "")
 export AUTO_NOTIFY_THRESHOLD=30
