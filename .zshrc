@@ -35,16 +35,16 @@ alias g=lazygit # Add lazygit alias
 alias c=clear
 
 # Kitty specific
-alias dv="cd ~/Documents/Development/"
 alias s="kitty +kitten ssh"
 alias transfer="kitty +kitten transfer"
 alias icat="kitty +kitten icat"
 alias hg="kitten hyperlinked_grep"
 
 # More aliases for other apps 
+alias dv="cd ~/Documents/Development/"
 alias spt="spotify_player"
 alias ls="eza --icons --git --header" 
-alias cat="bat"
+alias cat="bat --theme=base16-256"
 alias tree="eza --icons --git --header --tree"
 
 export PATH=$PATH:/Users/daniel/.cargo/bin
