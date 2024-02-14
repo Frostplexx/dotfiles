@@ -65,7 +65,7 @@ if [ "$action" == "-b" ] || [ "$action" == "--backup" ]; then
 	for item in ${ITEMS[@]}; do
 		if [ -f $item ]; then
 			echo "Copying $item to this directory"
-			cp $item ../
+			cp $item .
 		else
 			echo "Error: $item does not exist"
 		fi
@@ -83,7 +83,7 @@ if [ "$action" == "-b" ] || [ "$action" == "--backup" ]; then
 			# copy the folder into a subfolder into this directory that has the same name as the folder
 			echo "Copying $folder to this directory"
 			mkdir $folder_name
-			cp -r $folder ../
+			cp -r $folder .
 		fi
 	done
 
