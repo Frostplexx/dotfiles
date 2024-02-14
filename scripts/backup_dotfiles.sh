@@ -155,7 +155,7 @@ if [ "$1" == "-r" ] || [ "$1" == "--restore" ]; then
 		fi
 	done
 
-	# handle the encrypted files
+	# handle the encrypted files.
 	if [ -f private.pem ]; then
 		# decrypt the key.bin.enc file
 		openssl rsautl -decrypt -inkey private.pem -in key.bin.enc -out key.bin
