@@ -6,19 +6,28 @@
 # ==== VARIABLES ====
 
 DOCK_ANIM_SPEED=0.4
-LAUNCHPAD_ANIM_SPEED=0.1
+LAUNCHPAD_ANIM_SPEED=0.action
 LAUNCHPAD_PAGEFLIP_SPEED=0.4
-WINDOW_RESIZE_TIME=0.1
+WINDOW_RESIZE_TIME=0.action
 # ========
 # get the first argument
 if [ -z "$1" ]
 then
-    echo "Error: No argument supplied use -h or --help for help"
-    exit
+    read -p "Do you want to apply the animation tweaks (a) or restore them (r) or quit (q)?" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[aA]$ ]]; then
+        action="-a"
+    elif [[ $REPLY =~ ^[rR]$ ]]; then
+        action="-r"
+    elif [[ $REPLY =~ ^[qQ]$ ]]; then
+        exit
+    fi
+else 
+    action=$1
 fi
 
 # check if the first argument is -h or --help
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]
+if [ "$action" == "-h" ] || [ "$action" == "--help" ]
 then
     echo "Usage: ./reduce_macOS_anim_speed.sh [OPTION]"
     echo "Options:"
@@ -29,7 +38,7 @@ then
 fi
 
 
-if [ "$1" == "-a" ] || [ "$1" == "--apply" ]
+if [ "$action" == "-a" ] || [ "$action" == "--apply" ]
 then
   # Animation Speed increases
   echo "Increasing Dock animation speed."
@@ -72,7 +81,7 @@ then
 fi
 
 
-if [ "$1" == "-r" ] || [ "$1" == "--restore" ]
+if [ "$action" == "-r" ] || [ "$action" == "--restore" ]
 then 
   defaults delete com.apple.Dock autohide-delay
   defaults delete com.apple.Dock autohide-time-modifier

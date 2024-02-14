@@ -1,15 +1,10 @@
 #!/bin/sh
 
-echo "Installing Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-
 echo "Installing packages"
-brew install neovim php nodejs npm python3 python3-pip git wget htop nmap qemu spicetify-cli tetris zsh-autosuggestions zsh-syntax-highlighting fortune cowsay
-brew install ffmpeg binwalk curl neofetch mas
+./helpers/backup_brew_packages.sh -r
 
 echo "Installing casks"
-brew install --cask 1password-cli keka altserver kitty amethyst obsidian chromium onyx cyberduck openinterminal db-browser-for-sqlite orbstack devtoys postman
+brew install --cask 1password-cli alacritty keka altserver kitty amethyst obsidian chromium onyx cyberduck openinterminal db-browser-for-sqlite orbstack devtoys postman
 brew install --cask raycast firefox	termius font-jetbrains-mono-nerd-font transmission hex-fiend visual-studio-code imageoptim tailscale microsoft-remote-desktop
 brew install --cask jetbrains-toolbox mac-mouse-fix burp-suite spotify discord wireshark zoom nordvpn gitkraken moonlight app-cleaner discord
 
@@ -44,16 +39,20 @@ xcode-select --install
 echo "Restoring dotfiles"
 
 echo "Installing Fonts"
-./install_fonts.sh
+./helpers/install_fonts.sh
 
 echo "Installing Oh-My-Zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 
 echo "Installing Powerlevel10k"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 echo "Restoring dotfiles"
-/backup_dotfiles.sh -r
+./backup_dotfiles.sh -r
 
 echo "Tweaking macOS"
 ./reduce_macOS_anim_speed.sh -a
+
+
+echo "Installing IDE"
+./set_up_ide.sh

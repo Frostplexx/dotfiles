@@ -11,7 +11,24 @@ ENCRYPTED_ITEMS=("$HOME/.ssh/config")
 FOLDERS=("$HOME/.config")
 # =====================================================
 
-VERSION=2.2
+VERSION=2.3
+
+
+if [ -z "$1" ]
+then
+    read -p "Do you want to backup dotfiles (b), restore dotfiles (r) or quit (q)" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[bB]$ ]]; then
+        action="-b"
+    elif [[ $REPLY =~ ^[rR]$ ]]; then
+        action="-r"
+    elif [[ $REPLY =~ ^[qQ]$ ]]; then
+        exit
+    fi
+else 
+    action=$1
+fi
+
 
 # check if openssl is installed
 if ! command -v openssl &>/dev/null; then
@@ -26,13 +43,13 @@ if ! command -v git &>/dev/null; then
 fi
 
 # get the first argument
-if [ -z "$1" ]; then
+if [ -z "$action" ]; then
 	echo "Error: No argument supplied use -h or --help for help"
 	exit
 fi
 
 # check if the first argument is -h or --help
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+if [ "$action" == "-h" ] || [ "$action" == "--help" ]; then
 	echo "Usage: ./backup_dotfiles.sh [OPTION]"
 	echo "Options:"
 	echo "  -h, --help      Show this help message"
@@ -44,13 +61,13 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
 fi
 
 # check if the first argument is -v or --version
-if [ "$1" == "-v" ] || [ "$1" == "--version" ]; then
+if [ "$action" == "-v" ] || [ "$action" == "--version" ]; then
 	echo "Version: $VERSION"
 	exit
 fi
 
 # check if the first argument is -b or --backup
-if [ "$1" == "-b" ] || [ "$1" == "--backup" ]; then
+if [ "$action" == "-b" ] || [ "$action" == "--backup" ]; then
 	# Loop through the items to backup and copy them into this directory
 	# if the items doesnt exist then print an error message
 	echo "Starting backup..."
@@ -130,7 +147,7 @@ if [ "$1" == "-b" ] || [ "$1" == "--backup" ]; then
 	echo "Done"
 fi
 
-if [ "$1" == "-r" ] || [ "$1" == "--restore" ]; then
+if [ "$action" == "-r" ] || [ "$action" == "--restore" ]; then
 	# get the last path part of the files in the Items array
 	# Example: $HOME/.zshrc -> .zshrc
 	# this is needed because the files in the Items array are in this directory
@@ -176,9 +193,12 @@ if [ "$1" == "-r" ] || [ "$1" == "--restore" ]; then
 	else
 		echo "Warn: private.pem file does not exist. Skipping decryption"
 	fi
+
+    echo "Backing up brew packages"
+    ./helpers/backup_brew_packages.sh -b
 fi
 
-if [ "$1" == "-g" ] || [ "$1" == "--generate" ]; then
+if [ "$action" == "-g" ] || [ "$action" == "--generate" ]; then
 	# generate a public and private key
 	openssl genrsa -out private.pem 2048
 	openssl rsa -in private.pem -outform PEM -pubout -out public.pem

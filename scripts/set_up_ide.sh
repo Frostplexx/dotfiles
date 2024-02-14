@@ -44,7 +44,7 @@ if [ "$IS_MAC" = true ]; then
 	fi
 
     # Install font
-    ./scripts/install_fonts.sh
+    ./scripts/helpers/install_fonts.sh
 
 
 else # If using Linux
