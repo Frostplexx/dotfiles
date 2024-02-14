@@ -4,8 +4,6 @@
 # ADD THE ITEMS YOU WANT TO BACKUP HERE
 # Example: ("$HOME/.zshrc",...)
 ITEMS=("$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.ideavimrc" "$HOME/.vimrc" "$HOME/.zimrc")
-# ADD THE ITEMS YOU WANT TO ENCRYPT AND BACKUP HERE
-ENCRYPTED_ITEMS=("$HOME/.ssh/config")
 # ADD YOUR FOLDERS HERE
 # Example: ("$HOME/.config/spicetify", ...)
 FOLDERS=("$HOME/.config")
@@ -27,13 +25,6 @@ then
     fi
 else 
     action=$1
-fi
-
-
-# check if openssl is installed
-if ! command -v openssl &>/dev/null; then
-	echo "Error: openssl could not be found. Please install it"
-	exit
 fi
 
 # check if git is installed
@@ -74,7 +65,7 @@ if [ "$action" == "-b" ] || [ "$action" == "--backup" ]; then
 	for item in ${ITEMS[@]}; do
 		if [ -f $item ]; then
 			echo "Copying $item to this directory"
-			cp $item .
+			cp $item ../
 		else
 			echo "Error: $item does not exist"
 		fi
@@ -92,51 +83,11 @@ if [ "$action" == "-b" ] || [ "$action" == "--backup" ]; then
 			# copy the folder into a subfolder into this directory that has the same name as the folder
 			echo "Copying $folder to this directory"
 			mkdir $folder_name
-			cp -r $folder .
+			cp -r $folder ../
 		fi
 	done
 
-	if [ -f public.pem ]; then
-		# check if a public.pem file exists that contains a public key
-		# generate an encryption key
-		openssl rand -base64 32 >key.bin
-		# Encrypt the key.bin file
-		openssl rsautl -encrypt -inkey public.pem -pubin -in key.bin -out key.bin.enc
-
-		echo "Ecnrypting files..."
-		for item in ${ENCRYPTED_ITEMS[@]}; do
-			if [ -f $item ]; then
-				echo "Encrypting $item"
-				openssl enc -aes-256-cbc -salt -in $item -out $item.enc -pass file:./key.bin -pbkdf2
-				mv $item.enc .
-			else
-				echo "Error: $item does not exist"
-			fi
-		done
-
-		# remove the key.bin file
-		rm key.bin
-	else
-		echo "Warn: public.pem file does not exist. Skipping encryption"
-	fi
-
 	echo "Done"
-
-	# check if a private.pem file exists that contains a private key and if yes warn the user if its not in the .gitingore file
-	# also give the user the option to atumaticly add it to the .gitignore file, continue without adding it or abort the script
-	if [ -f private.pem ]; then
-		if ! grep -q "private.pem" .gitignore; then
-			echo "Warning: private.pem file exists but is not in the .gitignore file. This file contains a private key and should not be uploaded to github"
-			echo "Do you want to add it to the .gitignore file (y), coninue (n) or abort (a)? (y/n/a)"
-			read -r answer
-			if [ "$answer" == "y" ]; then
-				echo -e "\nprivate.pem" >>.gitignore
-				echo "Added private.pem to .gitignore"
-			elif [ "$answer" == "a" ]; then
-				exit
-			fi
-		fi
-	fi
 
 	# commit and upload them to github
 	echo "---------------------------------"
@@ -171,28 +122,6 @@ if [ "$action" == "-r" ] || [ "$action" == "--restore" ]; then
 			echo "Error: $folder does not exist"
 		fi
 	done
-
-	# handle the encrypted files.
-	if [ -f private.pem ]; then
-		# decrypt the key.bin.enc file
-		openssl rsautl -decrypt -inkey private.pem -in key.bin.enc -out key.bin
-
-		# decrypt the files
-		for item in ${ENCRYPTED_ITEMS[@]}; do
-			# current item is the last part of the path of the item in the ENCRYPTED_ITEMS array and .enc is added to it
-			cur_item=$(echo $item | rev | cut -d'/' -f1 | rev)".enc"
-			if [ -f $cur_item ]; then
-				echo "Decrypting $cur_item"
-				openssl enc -aes-256-cbc -d -in $cur_item -out $item -pass file:./key.bin -pbkdf2
-			else
-				echo "Error: $item does not exist"
-			fi
-		done
-		# delete the key.bin file
-		rm key.bin
-	else
-		echo "Warn: private.pem file does not exist. Skipping decryption"
-	fi
 
     echo "Backing up brew packages"
     ./helpers/backup_brew_packages.sh -b
