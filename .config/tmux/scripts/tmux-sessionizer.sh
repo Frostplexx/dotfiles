@@ -1,7 +1,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/Documents/Development ~/Documents/University ~/ ~/.config .config ~/Documents -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find ~/Documents/Development ~/Documents/University ~/ ~/.config .config ~/Documents -mindepth 1 -maxdepth 1 -type d | fzf --border=rounded --border-label="Open New Session" --no-color --preview='eza --tree --level=1 {}')
 fi
 
 if [[ -z $selected ]]; then

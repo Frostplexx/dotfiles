@@ -6,19 +6,47 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 
-#if [[ -z "$TMUX" ]] ;then
-#    ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
-#    if [[ -z "$ID" ]] ;then # if not available create a new one
-#        tmux new-session
-#    else
-#        tmux attach-session -t "$ID" # if available attach to it
-#    fi
-#fi
-
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
-#
+
+# Delete (one or multiple) selected application(s)
+# mnemonic [B]rew [C]lean [P]ackage (e.g. uninstall)
+bcp() {
+  local uninst=$(brew leaves | fzf -m --no-color)
+
+  if [[ $uninst ]]; then
+    for prog in $(echo $uninst);
+    do; brew uninstall $prog; done;
+  fi
+}
+
+# Update (one or multiple) selected application(s)
+# mnemonic [B]rew [U]pdate [P]ackage
+bup() {
+  local upd=$(brew leaves | fzf -m --no-color)
+
+  if [[ $upd ]]; then
+    for prog in $(echo $upd);
+    do; brew upgrade $prog; done;
+  fi
+}
+
+
+
+# fzf functions and shit
+
+# Install (one or multiple) selected application(s)
+# using "brew search" as source input
+# mnemonic [B]rew [I]nstall [P]ackage
+bip() {
+  local inst=$(brew search "$@" | fzf -m --no-color)
+
+  if [[ $inst ]]; then
+    for prog in $(echo $inst);
+    do; brew install $prog; done;
+  fi
+}
 
 # -----------------
 # Zsh configuration
@@ -46,6 +74,7 @@ alias spt="spotify_player"
 alias ls="eza --icons --git --header" 
 alias cat="bat --theme=base16-256"
 alias tree="eza --icons --git --header --tree"
+alias vimdiff="nvim -d"
 
 export PATH=$PATH:/Users/daniel/.cargo/bin
 # Configure Autonotify
