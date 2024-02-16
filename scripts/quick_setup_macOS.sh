@@ -3,12 +3,6 @@
 echo "Installing packages"
 ./helpers/backup_brew_packages.sh -r
 
-echo "Installing casks"
-brew install --cask 1password-cli alacritty keka altserver kitty amethyst obsidian chromium onyx cyberduck openinterminal db-browser-for-sqlite orbstack devtoys postman
-brew install --cask raycast firefox	termius font-jetbrains-mono-nerd-font transmission hex-fiend visual-studio-code imageoptim tailscale microsoft-remote-desktop
-brew install --cask jetbrains-toolbox mac-mouse-fix burp-suite spotify discord wireshark zoom nordvpn gitkraken moonlight app-cleaner discord
-
-
 echo "Installing Appstore App"
 
 mas install 1440147259  # AdGuard for Safari                            (1.11.15)

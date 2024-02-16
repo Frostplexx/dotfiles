@@ -18,7 +18,7 @@ if ! command -v fz >/dev/null; then
 fi
 
 
-selected=$(find ./scripts -type f -mindepth 1 -maxdepth 1 | fzf)
+selected=$(find ./scripts -type f -mindepth 1 -maxdepth 1 | fzf --no-color --border=rounded --border-label="Quick Setup your Mac and dotfiles")
 
 if [ -n "$selected" ]; then
     echo "Running $selected"
