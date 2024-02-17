@@ -47,6 +47,9 @@ bip() {
     do; brew install $prog; done;
   fi
 }
+kp () {
+    ps aux |fzf-tmux -p --border=rounded --border-label=" Kill Procress  " --reverse --no-color |awk '{print $2}' |xargs kill
+}
 
 # -----------------
 # Zsh configuration
