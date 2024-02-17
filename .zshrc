@@ -13,7 +13,7 @@ fi
 # Delete (one or multiple) selected application(s)
 # mnemonic [B]rew [C]lean [P]ackage (e.g. uninstall)
 bcp() {
-  local uninst=$(brew leaves | fzf -m --no-color)
+  local uninst=$(brew leaves | fzf-tmux -p --reverse -m --no-color)
 
   if [[ $uninst ]]; then
     for prog in $(echo $uninst);
@@ -24,7 +24,7 @@ bcp() {
 # Update (one or multiple) selected application(s)
 # mnemonic [B]rew [U]pdate [P]ackage
 bup() {
-  local upd=$(brew leaves | fzf -m --no-color)
+  local upd=$(brew leaves | fzf-tmux -p --reverse -m --no-color)
 
   if [[ $upd ]]; then
     for prog in $(echo $upd);
@@ -40,7 +40,7 @@ bup() {
 # using "brew search" as source input
 # mnemonic [B]rew [I]nstall [P]ackage
 bip() {
-  local inst=$(brew search "$@" | fzf -m --no-color)
+  local inst=$(brew search "$@" | fzf-tmux -p --reverse -m --no-color )
 
   if [[ $inst ]]; then
     for prog in $(echo $inst);
@@ -57,8 +57,9 @@ alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 alias python=python3
 alias pip=pip3
-alias vim=nvim # Add vim alias
 alias nv=neovide # Add neovide alias
+alias vim=nvim # Add vim alias
+alias v=nvim # Neovim quick alias
 alias g=lazygit # Add lazygit alias
 alias c=clear
 
