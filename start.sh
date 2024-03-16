@@ -13,7 +13,7 @@ if ! command -v brew >/dev/null; then
 fi
 
 # Install fzf if it doesn't exist
-if ! command -v fz >/dev/null; then
+if ! command -v fzf >/dev/null; then
     brew install fzf
 fi
 
